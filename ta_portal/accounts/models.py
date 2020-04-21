@@ -48,3 +48,16 @@ def create_or_update_user_profile(sender, instance, **kwargs):
     	elif instance.role==3:
         	AdminProfile.objects.create(user=instance)
     		instance.admin_profile.save()
+
+class Course(models.Model):
+	COURSE_TYPES = (
+		('L','Lab'),
+		('T','Theory'),
+	)
+	course_id = models.CharField(max_length=20)
+	name = models.CharField(max_length=255)
+	department = models.CharField(max_length=100)
+	credits = models.IntegerField()
+	students = models.IntegerField(default=0)
+	teacher = models.ForeignKey(TeacherProfile, on_delete=models.CASCADE)
+	course_type = models.CharField(max_length=1, choices=COURSE_TYPES)
