@@ -2,11 +2,10 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
-from django.contrib.auth.models import User
-from .models import TAProfile, TeacherProfile, AdminProfile
+from .models import User, TAProfile, TeacherProfile, AdminProfile
 
 # Register your models here.
+"""
 class TAProfileInline(admin.StackedInline):
     	model = TAProfile
     	can_delete = False
@@ -48,8 +47,9 @@ class AdminUserAdmin(UserAdmin):
         	if not obj:
             		return list()
         	return super(AdminUserAdmin, self).get_inline_instances(request, obj)
+"""
 
-admin.site.unregister(User)
-admin.site.register(User, TAUserAdmin)
-admin.site.register(User, TeacherUserAdmin)
-admin.site.register(User, AdminUserAdmin)
+admin.site.register(User)
+admin.site.register(TAProfile)
+admin.site.register(TeacherProfile)
+admin.site.register(AdminProfile)
