@@ -61,3 +61,13 @@ class Course(models.Model):
 	students = models.IntegerField(default=0)
 	teacher = models.ForeignKey(TeacherProfile, on_delete=models.CASCADE)
 	course_type = models.CharField(max_length=1, choices=COURSE_TYPES)
+
+class TAPreference(models.Model):
+	ta = models.ForeignKey(TAProfile, on_delete=models.CASCADE)
+	course = models.ForeignKey(Course, on_delete=models.CASCADE)
+	preference_no = models.IntegerField()
+
+class CoursePreference(models.Model):
+	ta = models.ForeignKey(TAProfile, on_delete=models.CASCADE)
+	course = models.ForeignKey(Course, on_delete=models.CASCADE)
+	preference_no = models.IntegerField()
