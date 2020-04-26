@@ -71,3 +71,29 @@ class CoursePreference(models.Model):
 	ta = models.ForeignKey(TAProfile, on_delete=models.CASCADE)
 	course = models.ForeignKey(Course, on_delete=models.CASCADE)
 	preference_no = models.IntegerField()
+
+class Declaration(models.Model):
+	MONTHS = (
+		('Jan','January'),
+		('Feb','February'),
+		('Mar','March'),
+		('Apr','April'),
+		('May','May'),
+		('Jun','June'),
+		('Jul','July'),
+		('Aug','August'),
+		('Sep','September'),
+		('Oct','October'),
+		('Nov','November'),
+		('Dec','December'),
+	)
+	APPROVALS = (
+		('Y','Yes'),
+		('N','No'),
+	)
+	month = models.CharField(max_length=3, choices=MONTHS)
+	avg_hours = models.IntegerField()
+	days = models.IntegerField()
+	approval = models.CharField(max_length=1, choices=APPROVALS)
+	rating = models.DecimalField(max_digits=3, decimal_places=2)
+	ta = models.ForeignKey(TAProfile, on_delete=models.CASCADE)
