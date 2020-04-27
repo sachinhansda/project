@@ -7,3 +7,8 @@ from django.shortcuts import render
 def home(request):
 	args = {}
 	return render(request, 'accounts/home.html', args)
+
+def profile_view(request):
+	user = request.user
+	args = {'user': user}
+	return render(request, 'accounts/profile_view.html', args)
