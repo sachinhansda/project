@@ -23,17 +23,17 @@ class User(AbstractUser):
 	role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, null=True, blank=True)
 
 class TAProfile(models.Model):
-	user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name='ta_profile')
+	user = models.OneToOneField(User, unique=True, on_delete=models.CASCADE, null=True, related_name='ta_profile')
 	phone_number = models.CharField(max_length=10)
 	address = models.CharField(max_length=100)
 
 class TeacherProfile(models.Model):
-	user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name='teacher_profile')
+	user = models.OneToOneField(User, unique=True, on_delete=models.CASCADE, null=True, related_name='teacher_profile')
 	phone_number = models.CharField(max_length=10)
 	address = models.CharField(max_length=100)
 
 class AdminProfile(models.Model):
-	user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, related_name='admin_profile')
+	user = models.OneToOneField(User, unique=True, on_delete=models.CASCADE, null=True, related_name='admin_profile')
 	phone_number = models.CharField(max_length=10)
 	address = models.CharField(max_length=100)
 
