@@ -10,8 +10,19 @@
 		<p>First Name: {{ user.first_name }}</p>
 		<p>Last Name: {{ user.last_name }}</p>
 		<p>Email: {{ user.email }}</p>
-		<p>Phone Number: {{ user.admin_profile.phone_number }}</p>
-		<p>Address: {{ user.admin_profile.address }}</p>
+		{% if user.role == 1 %}
+			<p>Role: TA</p>
+			<p>Phone Number: {{ user.ta_profile.phone_number }}</p>
+			<p>Address: {{ user.ta_profile.address }}</p>
+		{% elif user.role == 2 %}
+			<p>Role: Teacher</p>
+			<p>Phone Number: {{ user.teacher_profile.phone_number }}</p>
+			<p>Address: {{ user.teacher_profile.address }}</p>
+		{% elif user.role == 3 %}
+			<p>Role: Admin</p>
+			<p>Phone Number: {{ user.admin_profile.phone_number }}</p>
+			<p>Address: {{ user.admin_profile.address }}</p>
+		{% endif %}
 	</div>
 {% endblock %}
 
