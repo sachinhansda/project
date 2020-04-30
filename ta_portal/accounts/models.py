@@ -40,13 +40,13 @@ class AdminProfile(models.Model):
 @receiver(post_save, sender=User)
 def create_or_update_user_profile(sender, instance, **kwargs):
     	if instance.role==1:
-        	TAProfile.objects.create(user=instance)
+        	TAProfile.objects.get_or_create(user=instance)
     		instance.ta_profile.save()
     	elif instance.role==2:
-        	TeacherProfile.objects.create(user=instance)
+        	TeacherProfile.objects.get_or_create(user=instance)
     		instance.teacher_profile.save()
     	elif instance.role==3:
-        	AdminProfile.objects.create(user=instance)
+        	AdminProfile.objects.get_or_create(user=instance)
     		instance.admin_profile.save()
 
 class Course(models.Model):
