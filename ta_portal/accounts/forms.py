@@ -11,7 +11,7 @@ class UserChangeForm(ModelForm):
 
 class TAProfileChangeForm(ModelForm):
 	class Meta:
-		model = Profile
+		model = TAProfile
 		fields = (
 			'phone_number',
 			'address',
@@ -19,7 +19,7 @@ class TAProfileChangeForm(ModelForm):
 
 class TeacherProfileChangeForm(ModelForm):
 	class Meta:
-		model = Profile
+		model = TeacherProfile
 		fields = (
 			'phone_number',
 			'address',
@@ -27,7 +27,7 @@ class TeacherProfileChangeForm(ModelForm):
 
 class AdminProfileChangeForm(ModelForm):
 	class Meta:
-		model = Profile
+		model = AdminProfile
 		fields = (
 			'phone_number',
 			'address',

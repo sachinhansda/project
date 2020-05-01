@@ -34,7 +34,7 @@ def profile_edit(request):
 			custom_form = profile_form.save(False)
             		custom_form.user = user_form
             		custom_form.save()
-			return redirect('/accounts/profile')
+			return redirect('/accounts/profile/view')
 
 	else:
 		form = UserChangeForm(instance=request.user)
