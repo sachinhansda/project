@@ -123,3 +123,6 @@ STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = '/accounts/home'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
+
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
