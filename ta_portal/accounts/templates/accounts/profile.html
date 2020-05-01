@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<title>Profile</title>
+{% endblock %}
+{% block body %}
+	<div class="container">
+		<h1>Profile</h1>
+		<p><a href="{% url 'profile_view' %}">View Profile</a></p>
+		<p><a href="{% url 'profile_edit' %}">Edit Profile</a></p>
+	</div>
+{% endblock %}
