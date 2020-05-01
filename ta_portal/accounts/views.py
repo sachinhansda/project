@@ -2,23 +2,31 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 from accounts.models import User, TAProfile, TeacherProfile, AdminProfile
 from accounts.forms import UserChangeForm, TAProfileChangeForm, TeacherProfileChangeForm, AdminProfileChangeForm
 
 # Create your views here.
+
+# home function
 def home(request):
 	args = {}
 	return render(request, 'accounts/home.html', args)
 
+# profile function
 def profile(request):
 	args = {}
 	return render(request, 'accounts/profile.html', args)
 
+# profile view function
 def profile_view(request):
 	user = request.user
 	args = {'user': user}
 	return render(request, 'accounts/profile_view.html', args)
 
+# profile edit function
 def profile_edit(request):
 	if request.method == 'POST':
 		form = UserChangeForm(request.POST, instance=request.user)
@@ -46,3 +54,21 @@ def profile_edit(request):
 			profile_form = AdminProfileChangeForm(instance=request.user.admin_profile)
 		args = {'form': form, 'profile_form': profile_form}
 		return render(request, 'accounts/profile_edit.html', args)
+
+# change password function
+@login_required
+def change_password(request):
+	if request.method == 'POST':
+		form = PasswordChangeForm(data=request.POST, user=request.user)
+
+		if form.is_valid():
+			form.save()
+			update_session_auth_hash(request, form.user)
+			return redirect('/accounts/profile/view')
+		else:
+			return redirect('/accounts/change_password')
+	else:
+		form = PasswordChangeForm(user=request.user)
+
+		args = {'form': form}
+		return render(request, 'accounts/change_password.html', args)
