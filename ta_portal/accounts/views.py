@@ -14,7 +14,8 @@ from accounts.forms import (
 	UserForm,
 	TAProfileCreationForm,
 	TeacherProfileCreationForm,
-	AdminProfileCreationForm
+	AdminProfileCreationForm,
+	CourseCreationForm
 )
 
 # Create your views here.
@@ -131,3 +132,19 @@ def add_teacher(request):
 		args = {'form': user_form, 'profile_form': profile_form}
 		return render(request, 'accounts/add_people.html', args)
 
+# add course function
+def add_course(request):
+	if request.method == 'POST':
+		form = CourseCreationForm(request.POST)
+
+		if form.is_valid():
+			instance = form.save(commit=False)
+			instance.save()
+			return redirect('/accounts/home')
+		else:
+			return redirect('/accounts/add')
+
+	else:
+		form = CourseCreationForm()
+		args = {'form': form}
+		return render(request, 'accounts/add_course.html', args)

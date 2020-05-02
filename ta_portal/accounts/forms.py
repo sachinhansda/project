@@ -2,7 +2,7 @@ from django import forms
 from django.db import models
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
-from accounts.models import User, TAProfile, TeacherProfile, AdminProfile
+from accounts.models import User, TAProfile, TeacherProfile, AdminProfile, Course
 
 class UserChangeForm(ModelForm):
 	class Meta:
@@ -92,4 +92,17 @@ class AdminProfileCreationForm(ModelForm):
 		fields = (
 			'phone_number',
 			'address',
+		)
+
+class CourseCreationForm(ModelForm):
+	class Meta:
+		model = Course
+		fields = (
+			'course_id',
+			'name',
+			'department',
+			'credits',
+			'students',
+			'teacher',
+			'course_type',
 		)
