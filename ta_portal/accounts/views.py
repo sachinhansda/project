@@ -6,7 +6,16 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from accounts.models import User, TAProfile, TeacherProfile, AdminProfile
-from accounts.forms import UserChangeForm, TAProfileChangeForm, TeacherProfileChangeForm, AdminProfileChangeForm
+from accounts.forms import (
+	UserChangeForm, 
+	TAProfileChangeForm, 
+	TeacherProfileChangeForm, 
+	AdminProfileChangeForm,
+	UserCreationForm,
+	TAProfileCreationForm,
+	TeacherCreationForm,
+	AdminCreationForm
+)
 
 # Create your views here.
 
@@ -72,3 +81,13 @@ def change_password(request):
 
 		args = {'form': form}
 		return render(request, 'accounts/change_password.html', args)
+
+# add function
+def add(request):
+	args = {}
+	return render(request, 'accounts/add.html', args)
+
+# add ta function
+def add_ta(request):
+	if request.method == 'POST':
+		user_form = UserCreationForm(request.POST)

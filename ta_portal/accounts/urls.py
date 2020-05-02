@@ -17,6 +17,7 @@ urlpatterns = [
 	url(r'^profile/view/$', views.profile_view, name='profile_view'),
 	url(r'^profile/edit/$', views.profile_edit, name='profile_edit'),
 	url(r'^change_password/$', views.change_password, name='change_password'),
+	url(r'^add/$', views.add, name='add'),	
 
     	url(r'^reset_password/$', password_reset, {'template_name': 'accounts/reset_password.html', 'post_reset_redirect': 'password_reset_done', 'email_template_name': 'accounts/reset_password_email.html'}, name='reset_password'),
 

@@ -32,3 +32,39 @@ class AdminProfileChangeForm(ModelForm):
 			'phone_number',
 			'address',
 		)
+
+class UserCreationForm(ModelForm):
+	class Meta:
+		model = User
+		fields = (
+			'username',
+			'first_name',
+			'last_name',
+			'email',
+			'password1',
+			'password2'
+		)
+
+class TAProfileCreationForm(ModelForm):
+	class Meta:
+		model = TAProfile
+		fields = (
+			'phone_number',
+			'address',
+		)
+
+class TeacherProfileCreationForm(ModelForm):
+	class Meta:
+		model = TeacherProfile
+		fields = (
+			'phone_number',
+			'address',
+		)
+
+class AdminProfileCreationForm(ModelForm):
+	class Meta:
+		model = AdminProfile
+		fields = (
+			'phone_number',
+			'address',
+		)
