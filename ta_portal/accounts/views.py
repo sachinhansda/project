@@ -151,6 +151,6 @@ def add_course(request):
 
 # display courses function
 def display_courses(request):
-	courses = Course.objects.all()
+	courses = Course.objects.all().values
 	args = {'courses': courses}
 	return render(request, 'accounts/display_courses.html', args)
