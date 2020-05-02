@@ -107,5 +107,27 @@ def add_ta(request):
 		user_form = UserForm()
 		profile_form = TAProfileCreationForm()
 		args = {'form': user_form, 'profile_form': profile_form}
-		return render(request, 'accounts/add_ta.html', args)
+		return render(request, 'accounts/add_people.html', args)
+
+# add teacher function
+def add_teacher(request):
+	if request.method == 'POST':
+		user_form = UserForm(request.POST)
+		profile_form = TeacherProfileCreationForm(request.POST)
+
+		if user_form.is_valid() and profile_form.is_valid():
+			user = user_form.save(commit=False)
+			user.save()
+			user.teacher_profile.phone_number = profile_form.cleaned_data.get('phone_number')
+			user.teacher_profile.address = profile_form.cleaned_data.get('address')
+			user.teacher_profile.save()
+			return redirect('/accounts/home')
+		else:
+			return redirect('/accounts/add')
+
+	else:
+		user_form = UserForm()
+		profile_form = TeacherProfileCreationForm()
+		args = {'form': user_form, 'profile_form': profile_form}
+		return render(request, 'accounts/add_people.html', args)
 
