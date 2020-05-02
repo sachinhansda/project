@@ -21,6 +21,7 @@ urlpatterns = [
 	url(r'^add/ta/$', views.add_ta, name='add_ta'),
 	url(r'^add/teacher/$', views.add_teacher, name='add_teacher'),
 	url(r'^add/course/$', views.add_course, name='add_course'),
+	url(r'^display_courses/$', views.display_courses, name='display_courses'),
 
     	url(r'^reset_password/$', password_reset, {'template_name': 'accounts/reset_password.html', 'post_reset_redirect': 'password_reset_done', 'email_template_name': 'accounts/reset_password_email.html'}, name='reset_password'),
 

@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
-from accounts.models import User, TAProfile, TeacherProfile, AdminProfile
+from accounts.models import User, TAProfile, TeacherProfile, AdminProfile, Course
 from accounts.forms import (
 	UserChangeForm, 
 	TAProfileChangeForm, 
@@ -148,3 +148,9 @@ def add_course(request):
 		form = CourseCreationForm()
 		args = {'form': form}
 		return render(request, 'accounts/add_course.html', args)
+
+# display courses function
+def display_courses(request):
+	courses = Course.objects.all()
+	args = {'courses': courses}
+	return render(request, 'accounts/display_courses.html', args)
