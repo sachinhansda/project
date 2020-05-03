@@ -62,8 +62,11 @@ class Course(models.Model):
 	teacher = models.ForeignKey(TeacherProfile, related_name='course_teacher', on_delete=models.CASCADE)
 	course_type = models.CharField(max_length=1, choices=COURSE_TYPES)
 
-	def get_teacher(self):
-		return self.teacher.address
+	def get_teacher_first_name(self):
+		return self.teacher.user.first_name
+
+	def get_teacher_last_name(self):
+		return self.teacher.user.last_name
 
 class TAPreference(models.Model):
 	ta = models.ForeignKey(TAProfile, on_delete=models.CASCADE)
