@@ -36,6 +36,12 @@ def profile_view(request):
 	args = {'user': user}
 	return render(request, 'accounts/profile_view.html', args)
 
+# function to view profile of others
+def profile_view_other(request, pk):
+	teacher = TeacherProfile.objects.get(id=pk)
+	args = {'teacher': teacher}
+	return render(request, 'accounts/profile_view_other.html', args)
+
 # profile edit function
 def profile_edit(request):
 	if request.method == 'POST':
