@@ -27,10 +27,17 @@ class TAProfile(models.Model):
 	phone_number = models.CharField(max_length=10)
 	address = models.CharField(max_length=100)
 
+	def __str__(self):
+		return self.user.first_name
+
 class TeacherProfile(models.Model):
 	user = models.OneToOneField(User, unique=True, on_delete=models.CASCADE, null=True, related_name='teacher_profile')
 	phone_number = models.CharField(max_length=10)
 	address = models.CharField(max_length=100)
+
+	def __str__(self):
+		return self.user.first_name
+
 
 class AdminProfile(models.Model):
 	user = models.OneToOneField(User, unique=True, on_delete=models.CASCADE, null=True, related_name='admin_profile')
