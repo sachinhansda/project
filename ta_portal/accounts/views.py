@@ -151,27 +151,6 @@ def add_course(request):
 
 # display courses function
 def display_courses(request):
-	course_list = []
 	courses = Course.objects.all()
-	for course in courses:
-		course_id = course.course_id
-		name = course.name
-		department = course.department
-		credits = course.credits
-		no_of_students = course.students
-		first_name = course.get_teacher_first_name()
-		last_name = course.get_teacher_last_name()
-		course_type = course.course_type
-		course_details = {
-			'course_id': course_id,
-			'name': name,
-			'department': department,
-			'credits': credits,
-			'no_of_students': no_of_students,
-			'first_name': first_name,
-			'last_name': last_name,
-			'course_type': course_type
-		}
-		course_list.append(course_details)
-	args = {'course_list': course_list}
+	args = { 'courses': courses }
 	return render(request, 'accounts/display_courses.html', args)

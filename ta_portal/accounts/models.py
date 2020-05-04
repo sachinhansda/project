@@ -28,7 +28,7 @@ class TAProfile(models.Model):
 	address = models.CharField(max_length=100)
 
 	def __str__(self):
-		return self.user.first_name
+		return self.user.first_name + " " + self.user.last_name
 
 class TeacherProfile(models.Model):
 	user = models.OneToOneField(User, unique=True, on_delete=models.CASCADE, null=True, related_name='teacher_profile')
@@ -36,13 +36,16 @@ class TeacherProfile(models.Model):
 	address = models.CharField(max_length=100)
 
 	def __str__(self):
-		return self.user.first_name
+		return self.user.first_name + " " + self.user.last_name
 
 
 class AdminProfile(models.Model):
 	user = models.OneToOneField(User, unique=True, on_delete=models.CASCADE, null=True, related_name='admin_profile')
 	phone_number = models.CharField(max_length=10)
 	address = models.CharField(max_length=100)
+
+	def __str__(self):
+		return self.user.first_name + " " + self.user.last_name
 
 @receiver(post_save, sender=User)
 def create_or_update_user_profile(sender, instance, **kwargs):
@@ -68,6 +71,9 @@ class Course(models.Model):
 	students = models.IntegerField(default=0)
 	teacher = models.ForeignKey(TeacherProfile, related_name='course_teacher', on_delete=models.CASCADE)
 	course_type = models.CharField(max_length=1, choices=COURSE_TYPES)
+
+	def __str__(self):
+		return self.name
 
 	def get_teacher_first_name(self):
 		return self.teacher.user.first_name
