@@ -1,6 +1,6 @@
 from django import forms
 from django.db import models
-from django.forms import ModelForm
+from django.forms import ModelForm, Form
 from django.contrib.auth.forms import UserCreationForm
 from accounts.models import User, TAProfile, TeacherProfile, AdminProfile, Course
 
@@ -106,3 +106,7 @@ class CourseCreationForm(ModelForm):
 			'teacher',
 			'course_type',
 		)
+
+class FindForm(Form):
+	ta = forms.ModelChoiceField(queryset=TAProfile.objects.all())
+

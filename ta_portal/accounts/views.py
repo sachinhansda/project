@@ -15,7 +15,8 @@ from accounts.forms import (
 	TAProfileCreationForm,
 	TeacherProfileCreationForm,
 	AdminProfileCreationForm,
-	CourseCreationForm
+	CourseCreationForm,
+	FindForm
 )
 
 # Create your views here.
@@ -177,3 +178,9 @@ def display_teachers(request):
 	teachers = TeacherProfile.objects.all()
 	args = { 'teachers': teachers }
 	return render(request, 'accounts/display_teachers.html', args)
+
+def find(request):
+	form = FindForm()
+	args = {'form': form}
+	return render(request, 'accounts/find.html', args)
+

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<title>Find</title>
+{% endblock %}
+{% block body %}
+	<div class="container">
+		<form method="post">
+			{% csrf_token %}
+			{{ form }}
+			<button type="submit">Submit</button>
+		</form>
+	</div>
+{% endblock %}
