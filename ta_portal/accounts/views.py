@@ -149,8 +149,25 @@ def add_course(request):
 		args = {'form': form}
 		return render(request, 'accounts/add_course.html', args)
 
+# display function
+def display(request):
+	args = {}
+	return render(request, 'accounts/display.html', args)
+
 # display courses function
 def display_courses(request):
 	courses = Course.objects.all()
 	args = { 'courses': courses }
 	return render(request, 'accounts/display_courses.html', args)
+
+# display tas function
+def display_tas(request):
+	tas = TAProfile.objects.all()
+	args = { 'tas': tas }
+	return render(request, 'accounts/display_tas.html', args)
+
+# display teachers function
+def display_teachers(request):
+	teachers = TeacherProfile.objects.all()
+	args = { 'teachers': teachers }
+	return render(request, 'accounts/display_teachers.html', args)

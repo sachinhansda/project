@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block head%}
+	<title>TAs</title>
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+	<table style="border: 1px solid black; width:100%">
+	{% for ta in tas %}
+	<tr>
+	<td style="border: 2px solid black; padding:10px">
+		<p>Name: {{ ta.user.first_name }} {{ ta.user.last_name }}</p>
+		<p>Email: {{ ta.user.email }}</p>
+		<p>Phone Number: {{ ta.phone_number }}</p>
+		<p>Address: {{ ta.address }}</p>
+	</td>
+	</tr>
+	{% endfor %}
+	</table>
+	</div>
+{% endblock %}

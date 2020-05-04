@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block head%}
+	<title>Teachers</title>
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+	<table style="border: 1px solid black; width:100%">
+	{% for teacher in teachers %}
+	<tr>
+	<td style="border: 2px solid black; padding:10px">
+		<p>Name: {{ teacher.user.first_name }} {{ teacher.user.last_name }}</p>
+		<p>Email: {{ teacher.user.email }}</p>
+		<p>Phone Number: {{ teacher.phone_number }}</p>
+		<p>Address: {{ teacher.address }}</p>
+	</td>
+	</tr>
+	{% endfor %}
+	</table>
+	</div>
+{% endblock %}
