@@ -5,10 +5,26 @@
 {% endblock %}
 {% block body %}
 	<div class="container">
+		<p>
 		<form method="post">
 			{% csrf_token %}
-			{{ form }}
+			{{ ta_form }}
 			<button type="submit">Submit</button>
 		</form>
+		</p>
+		<p>
+		<form method="post">
+			{% csrf_token %}
+			{{ teacher_form }}
+			<button type="submit">Submit</button>
+		</form>
+		</p>
+		<p>
+		<form method="post">
+			{% csrf_token %}
+			{{ course_form }}
+			<button type="submit">Submit</button>
+		</form>
+		</p>
 	</div>
 {% endblock %}

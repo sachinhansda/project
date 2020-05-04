@@ -107,6 +107,11 @@ class CourseCreationForm(ModelForm):
 			'course_type',
 		)
 
-class FindForm(Form):
+class FindTAForm(Form):
 	ta = forms.ModelChoiceField(queryset=TAProfile.objects.all())
 
+class FindTeacherForm(Form):
+	teacher = forms.ModelChoiceField(queryset=TeacherProfile.objects.all())
+
+class FindCourseForm(Form):
+	course = forms.ModelChoiceField(queryset=Course.objects.all())

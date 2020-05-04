@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block head %}
+	<title>Profile</title>
+{% endblock %}
+{% block body %}
+	<div class="container">
+		<h1>Profile</h1>
+		<p>Name: {{ ta.user.first_name }} {{ ta.user.last_name }}</p>
+		<p>Email: {{ ta.user.email }}</p>
+		<p>Phone Number: {{ ta.phone_number }}</p>
+		<p>Address: {{ ta.address }}</p>
+	</div>
+{% endblock %}
+

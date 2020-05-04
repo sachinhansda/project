@@ -16,7 +16,9 @@ from accounts.forms import (
 	TeacherProfileCreationForm,
 	AdminProfileCreationForm,
 	CourseCreationForm,
-	FindForm
+	FindTAForm,
+	FindTeacherForm,
+	FindCourseForm
 )
 
 # Create your views here.
@@ -41,7 +43,7 @@ def profile_view(request):
 def profile_view_other(request, pk):
 	teacher = TeacherProfile.objects.get(id=pk)
 	args = {'teacher': teacher}
-	return render(request, 'accounts/profile_view_other.html', args)
+	return render(request, 'accounts/profile_view_teacher.html', args)
 
 # profile edit function
 def profile_edit(request):
@@ -180,7 +182,26 @@ def display_teachers(request):
 	return render(request, 'accounts/display_teachers.html', args)
 
 def find(request):
-	form = FindForm()
-	args = {'form': form}
-	return render(request, 'accounts/find.html', args)
+	if request.method  == 'POST':
+		ta_form = FindTAForm(request.POST)
+		teacher_form = FindTeacherForm(request.POST)
+		course_form = FindCourseForm(request.POST)
+		if ta_form.is_valid():
+			ta = ta_form.cleaned_data.get('ta')
+			args = { 'ta': ta }
+			return render(request, 'accounts/profile_view_ta.html', args)
+		elif teacher_form.is_valid():
+			teacher = teacher_form.cleaned_data.get('teacher')
+			args = { 'teacher': teacher }
+			return render(request, 'accounts/profile_view_teacher.html', args)
+		elif course_form.is_valid():
+			course = course_form.cleaned_data.get('course')
+			args = { 'course': course }
+			return render(request, 'accounts/view_course.html', args)
+	else:	
+		ta_form = FindTAForm()
+		teacher_form = FindTeacherForm()
+		course_form = FindCourseForm()
+		args = { 'ta_form': ta_form, 'teacher_form': teacher_form, 'course_form': course_form }
+		return render(request, 'accounts/find.html', args)
 

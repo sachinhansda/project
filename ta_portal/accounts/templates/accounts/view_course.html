@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block head%}
+	<title>Courses</title>
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<p>Course ID: {{ course.course_id }}</p>
+		<p>Name: {{ course.name }}</p>
+		<p>Department: {{ course.department }}</p>
+		<p>Credits: {{ course.credits }}</p>
+		<p>No. of Students: {{ course.students }}</p>
+		<p>Teacher: <a href="{% url 'profile_view_other' pk=course.teacher.id %}">{{ course.teacher }}</a></p>
+		{% if course.course_type == 'L' %}
+			<p>Course Type: Lab</p>
+		{% else %}
+			<p>Course Type: Theory</p>
+		{% endif %}
+	</div>
+{% endblock %}
