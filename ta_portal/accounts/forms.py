@@ -36,15 +36,6 @@ class AdminProfileChangeForm(ModelForm):
 		)
 
 class UserForm(UserCreationForm):
-    	TA = 1
-    	TEACHER = 2
-    	ADMIN = 3
-    	ROLE_CHOICES = (
-        	(TA, 'TA'),
-        	(TEACHER, 'Teacher'),
-        	(ADMIN, 'Admin'),
-    	)
-	role = models.PositiveSmallIntegerField(choices=ROLE_CHOICES, null=True, blank=True)
 
 	class Meta:
 		model = User
@@ -53,7 +44,6 @@ class UserForm(UserCreationForm):
 			'first_name',
 			'last_name',
 			'email',
-			'role',
 			'password1',
 			'password2'
 		)

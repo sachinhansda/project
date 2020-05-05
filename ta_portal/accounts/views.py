@@ -105,6 +105,7 @@ def add_ta(request):
 
 		if user_form.is_valid() and profile_form.is_valid():
 			user = user_form.save(commit=False)
+			user.role = 1
 			user.save()
 			user.ta_profile.phone_number = profile_form.cleaned_data.get('phone_number')
 			user.ta_profile.address = profile_form.cleaned_data.get('address')
@@ -127,6 +128,7 @@ def add_teacher(request):
 
 		if user_form.is_valid() and profile_form.is_valid():
 			user = user_form.save(commit=False)
+			user.role = 2
 			user.save()
 			user.teacher_profile.phone_number = profile_form.cleaned_data.get('phone_number')
 			user.teacher_profile.address = profile_form.cleaned_data.get('address')
