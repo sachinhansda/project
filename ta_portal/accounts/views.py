@@ -18,7 +18,8 @@ from accounts.forms import (
 	CourseCreationForm,
 	FindTAForm,
 	FindTeacherForm,
-	FindCourseForm
+	FindCourseForm,
+	TAPreferenceForm
 )
 
 # Create your views here.
@@ -206,4 +207,10 @@ def find(request):
 		course_form = FindCourseForm()
 		args = { 'ta_form': ta_form, 'teacher_form': teacher_form, 'course_form': course_form }
 		return render(request, 'accounts/find.html', args)
+
+def ta_preference(request):
+	form = TAPreferenceForm()
+	courses = Course.objects.all()
+	args = { 'form': form, 'courses': courses }
+	return render(request, 'accounts/ta_preference.html', args)
 

@@ -27,6 +27,7 @@ urlpatterns = [
 	url(r'^display/tas/$', views.display_tas, name='display_tas'),
 	url(r'^display/teachers/$', views.display_teachers, name='display_teachers'),
 	url(r'^find/$', views.find, name='find'),
+	url(r'^ta_preference/$', views.ta_preference, name='ta_preference'),
 
     	url(r'^reset_password/$', password_reset, {'template_name': 'accounts/reset_password.html', 'post_reset_redirect': 'password_reset_done', 'email_template_name': 'accounts/reset_password_email.html'}, name='reset_password'),
 
