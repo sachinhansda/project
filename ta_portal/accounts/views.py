@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.forms import formset_factory
 from django.contrib.auth import update_session_auth_hash
-from accounts.models import User, TAProfile, TeacherProfile, AdminProfile, Course
+from accounts.models import User, TAProfile, TeacherProfile, AdminProfile, Course, TAPreference
 from accounts.forms import (
 	UserChangeForm, 
 	TAProfileChangeForm, 
@@ -210,8 +210,29 @@ def find(request):
 		return render(request, 'accounts/find.html', args)
 
 def ta_preference(request):
-	course_count = Course.objects.all().count()
-	formset = formset_factory(TAPreferenceForm, extra=course_count)
-	args = { 'formset': formset }
-	return render(request, 'accounts/ta_preference.html', args)
+	if request.method  == 'POST':
+		user = request.user
+		course_count = Course.objects.all().count()
+		TAPrefFormSet = formset_factory(TAPreferenceForm, extra=course_count)
+		formset = TAPrefFormSet(request.POST)
+		if formset.is_valid():
+			i = 1
+			for form in formset:
+				if form.is_valid():
+					instance = form.save(commit=False)
+					cd = instance.cleaned_data.get('preference')
+					tapreference = TAPreference(
+						ta = user,
+						course = cd,
+						preference_no = i
+					)
+					tapreference.save()
+					i = i + 1
+		return redirect('/accounts/home')
+	else:
+		course_count = Course.objects.all().count()
+		TAPrefFormSet = formset_factory(TAPreferenceForm, extra=course_count)
+		formset = TAPrefFormSet()
+		args = { 'formset': formset }
+		return render(request, 'accounts/ta_preference.html', args)
 
