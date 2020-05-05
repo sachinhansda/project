@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
+from django.forms import formset_factory
 from django.contrib.auth import update_session_auth_hash
 from accounts.models import User, TAProfile, TeacherProfile, AdminProfile, Course
 from accounts.forms import (
@@ -209,8 +210,8 @@ def find(request):
 		return render(request, 'accounts/find.html', args)
 
 def ta_preference(request):
-	form = TAPreferenceForm()
-	courses = Course.objects.all()
-	args = { 'form': form, 'courses': courses }
+	course_count = Course.objects.all().count()
+	formset = formset_factory(TAPreferenceForm, extra=course_count)
+	args = { 'formset': formset }
 	return render(request, 'accounts/ta_preference.html', args)
 

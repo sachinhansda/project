@@ -6,14 +6,10 @@
 
 {% block body %}
 	<div class="container">
-	{% for course in courses %}
-		<p>
 		<form method="post">
 			{% csrf_token %}
-			{{ form }}
+			{{ formset.as_p }}
+			<button type="submit">Submit</button>
 		</form>
-		</p>
-	{% endfor %}
-	<button type="submit">Submit</button>
 	</div>
 {% endblock %}
