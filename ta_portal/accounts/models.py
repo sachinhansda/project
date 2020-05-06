@@ -75,16 +75,13 @@ class Course(models.Model):
 	def __str__(self):
 		return self.name
 
-	def get_teacher_first_name(self):
-		return self.teacher.user.first_name
-
-	def get_teacher_last_name(self):
-		return self.teacher.user.last_name
-
 class TAPreference(models.Model):
 	ta = models.ForeignKey(TAProfile, on_delete=models.CASCADE)
 	course = models.ForeignKey(Course, on_delete=models.CASCADE)
 	preference_no = models.IntegerField()
+
+	def __str__(self):
+		return self.ta.user.first_name + " " + self.ta.user.last_name + " Preference " + str(self.preference_no)
 
 class CoursePreference(models.Model):
 	ta = models.ForeignKey(TAProfile, on_delete=models.CASCADE)
