@@ -173,6 +173,13 @@ def display_courses(request):
 	args = { 'courses': courses }
 	return render(request, 'accounts/display_courses.html', args)
 
+# function to display courses of a teacher
+def display_courses_teacher(request):
+	user = request.user
+	courses = Course.objects.get(pk=user.pk)
+	args = { 'courses': courses }
+	return render(request, 'accounts/display_courses_teacher.html', args)
+
 # display tas function
 def display_tas(request):
 	tas = TAProfile.objects.all()
@@ -185,6 +192,7 @@ def display_teachers(request):
 	args = { 'teachers': teachers }
 	return render(request, 'accounts/display_teachers.html', args)
 
+# find function
 def find(request):
 	if request.method  == 'POST':
 		ta_form = FindTAForm(request.POST)
@@ -209,6 +217,7 @@ def find(request):
 		args = { 'ta_form': ta_form, 'teacher_form': teacher_form, 'course_form': course_form }
 		return render(request, 'accounts/find.html', args)
 
+# function to get ta preference
 def ta_preference(request):
 	if request.method  == 'POST':
 		user = request.user
@@ -235,3 +244,29 @@ def ta_preference(request):
 		args = { 'formset': formset }
 		return render(request, 'accounts/ta_preference.html', args)
 
+# function to get course preference
+"""def course_preference(request):
+	if request.method  == 'POST':
+		user = request.user
+		ta_count = TAProfile.objects.all().count()
+		CoursePrefFormSet = formset_factory(CoursePreferenceForm, extra=course_count)
+		formset = CoursePrefFormSet(request.POST)
+		if formset.is_valid():
+			i = 1
+			for form in formset:
+				if form.is_valid():
+					cd = form.cleaned_data.get('preference')
+					tapreference = CoursePreference.objects.create(
+						ta = cd,
+						course = ,
+						preference_no = i,
+					)
+					tapreference.save()
+					i = i + 1
+		return redirect('/accounts/home')
+	else:
+		ta_count = TAProfile.objects.all().count()
+		CoursePrefFormSet = formset_factory(CoursePreferenceForm, extra=ta_count)
+		formset = CoursePrefFormSet()
+		args = { 'formset': formset }
+		return render(request, 'accounts/course_preference.html', args)"""

@@ -108,3 +108,6 @@ class FindCourseForm(Form):
 
 class TAPreferenceForm(Form):
 	preference = forms.ModelChoiceField(queryset=Course.objects.all())
+
+class CoursePreferenceForm(Form):
+	preference = forms.ModelChoiceField(queryset=TAProfile.objects.all())

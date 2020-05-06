@@ -88,6 +88,9 @@ class CoursePreference(models.Model):
 	course = models.ForeignKey(Course, on_delete=models.CASCADE)
 	preference_no = models.IntegerField()
 
+	def __str__(self):
+		return self.course.name + " " + " Preference " + str(self.preference_no)
+
 class Declaration(models.Model):
 	MONTHS = (
 		('Jan','January'),

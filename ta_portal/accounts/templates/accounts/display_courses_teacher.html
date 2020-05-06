@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block head%}
+	<title>Your Courses</title>
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+	<table style="border: 1px solid black; width:100%">
+	{% for course in courses %}
+	<tr>
+	<td style="border: 2px solid black; padding:10px">
+		<p>Course ID: {{ course.course_id }}</p>
+		<p>Name: {{ course.name }}</p>
+		<p>Department: {{ course.department }}</p>
+		<p>Credits: {{ course.credits }}</p>
+		<p>No. of Students: {{ course.students }}</p>
+		{% if course.course_type == 'L' %}
+			<p>Course Type: Lab</p>
+		{% else %}
+			<p>Course Type: Theory</p>
+		{% endif %}
+		<p>Set TA Preferences</p>
+	</td>
+	</tr>
+	{% endfor %}
+	</table>
+	</div>
+{% endblock %}
