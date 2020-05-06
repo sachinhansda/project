@@ -219,12 +219,11 @@ def ta_preference(request):
 			i = 1
 			for form in formset:
 				if form.is_valid():
-					instance = form.save(commit=False)
-					cd = instance.cleaned_data.get('preference')
-					tapreference = TAPreference(
-						ta = user,
+					cd = form.cleaned_data.get('preference')
+					tapreference = TAPreference.objects.create(
+						ta = user.ta_profile,
 						course = cd,
-						preference_no = i
+						preference_no = i,
 					)
 					tapreference.save()
 					i = i + 1
