@@ -32,6 +32,9 @@
 	      <li><a href="{% url 'find' %}">Find</a></li>
 	      <li><a href="{% url 'ta_preference' %}">Preference</a></li>
               <li><a href="{% url 'change_password' %}">Change Password</a></li>
+            {% if user.role == 2 %}
+                  <li><a href="{% url 'display_courses_teacher' %}">My Courses</a></li>
+            {% endif %}
             </ul>
 	    <ul class="nav navbar-nav navbar-right">
               <li><a href="{% url 'logout' %}">Logout</a></li>
