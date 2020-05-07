@@ -175,8 +175,8 @@ def display_courses(request):
 
 # function to display courses of a teacher
 def display_courses_teacher(request):
-	user = request.user
-	courses = Course.objects.filter(teacher=user)
+	pk = request.user.teacher_profile.id
+	courses = Course.objects.filter(teacher_id=pk)
 	args = { 'courses': courses }
 	return render(request, 'accounts/display_courses_teacher.html', args)
 
