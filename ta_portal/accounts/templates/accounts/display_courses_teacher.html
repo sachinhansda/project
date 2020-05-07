@@ -20,7 +20,7 @@
 		{% else %}
 			<p>Course Type: Theory</p>
 		{% endif %}
-		<p>Set TA Preferences</p>
+		<p><a href="{% url 'course_preference' id=course.id %}">Set TA Preferences</a></p>
 	</td>
 	</tr>
 	{% endfor %}

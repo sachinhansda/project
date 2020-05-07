@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.forms import formset_factory
 from django.contrib.auth import update_session_auth_hash
-from accounts.models import User, TAProfile, TeacherProfile, AdminProfile, Course, TAPreference
+from accounts.models import User, TAProfile, TeacherProfile, AdminProfile, Course, TAPreference, CoursePreference
 from accounts.forms import (
 	UserChangeForm, 
 	TAProfileChangeForm, 
@@ -20,7 +20,8 @@ from accounts.forms import (
 	FindTAForm,
 	FindTeacherForm,
 	FindCourseForm,
-	TAPreferenceForm
+	TAPreferenceForm,
+	CoursePreferenceForm
 )
 
 # Create your views here.
@@ -245,11 +246,11 @@ def ta_preference(request):
 		return render(request, 'accounts/ta_preference.html', args)
 
 # function to get course preference
-"""def course_preference(request):
+def course_preference(request, id=None):
 	if request.method  == 'POST':
 		user = request.user
 		ta_count = TAProfile.objects.all().count()
-		CoursePrefFormSet = formset_factory(CoursePreferenceForm, extra=course_count)
+		CoursePrefFormSet = formset_factory(CoursePreferenceForm, extra=ta_count)
 		formset = CoursePrefFormSet(request.POST)
 		if formset.is_valid():
 			i = 1
@@ -258,7 +259,7 @@ def ta_preference(request):
 					cd = form.cleaned_data.get('preference')
 					tapreference = CoursePreference.objects.create(
 						ta = cd,
-						course = ,
+						course = Course.objects.get(id=id),
 						preference_no = i,
 					)
 					tapreference.save()
@@ -269,4 +270,4 @@ def ta_preference(request):
 		CoursePrefFormSet = formset_factory(CoursePreferenceForm, extra=ta_count)
 		formset = CoursePrefFormSet()
 		args = { 'formset': formset }
-		return render(request, 'accounts/course_preference.html', args)"""
+		return render(request, 'accounts/course_preference.html', args)
