@@ -313,6 +313,13 @@ def gale_shapley(request):
 			ta = allotment[allot],
 		)
 		taallotment.save()
+	return redirect('/accounts/home')
 
+def ta_allotment_results(request):
+	allotments = TAAlloment.objects.all()
+	args = { 'allotments': allotments }
+	return render(request, 'accounts/allotment.html', args)
+	
+	
 			
 

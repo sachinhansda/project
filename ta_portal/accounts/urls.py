@@ -30,6 +30,8 @@ urlpatterns = [
 	url(r'^ta_preference/$', views.ta_preference, name='ta_preference'),
 	url(r'^course_preference/(?P<id>\d+)/$', views.course_preference, name='course_preference'),
 	url(r'^display/courses/teacher/$', views.display_courses_teacher, name='display_courses_teacher'),
+	url(r'^allotment/$', views.gale_shapley, name='allotment'),
+	url(r'^allotment/results/$', views.ta_allotment_results, name='allotment_results'),
 
     	url(r'^reset_password/$', password_reset, {'template_name': 'accounts/reset_password.html', 'post_reset_redirect': 'password_reset_done', 'email_template_name': 'accounts/reset_password_email.html'}, name='reset_password'),
 

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block head%}
+	<title>TA allotment</title>
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<table style="border: 1px solid black; width:100%">
+			<tr><th> Course </th><th> TA </th></tr>
+			{% for allotment in allotments %}
+				<tr><td>{% allotment.course %}</td><td>{% allotment.ta %}</td></tr>
+			{% endfor %}
+		</table>
+	</div>
+{% endblock %}

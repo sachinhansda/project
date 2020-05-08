@@ -39,6 +39,7 @@
             {% if user.role == 2 %}
                   <li><a href="{% url 'display_courses_teacher' %}">My Courses</a></li>
             {% endif %}
+              <li><a href="{% url 'allotment_results' %}">Allotment</a></li>
             </ul>
 	    <ul class="nav navbar-nav navbar-right">
               <li><a href="{% url 'logout' %}">Logout</a></li>
