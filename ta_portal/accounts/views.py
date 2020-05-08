@@ -277,12 +277,42 @@ def gale_shapley(request):
 	courses = Course.objects.all()
 	ta_count = len(tas)
 	course_count = len(courses)
+	tapreflist = { }
 	taprefs = TAPreference.objects.all()
-	courseprefs = CoursePreference.objects.all()
+	for tapref in taprefs:
+		ta = tapref.ta
+		course = tapref.course
+		pref = tapref.preference_no
+		tapreflist[ta][pref] = course
+	coursepreflist = { }
+	for coursepref in courseprefs:
+		ta = coursepref.ta
+		course = coursepref.course
+		pref = coursepref.preference_no
+		coursepreflist[course][ta] = pref
 	freetas = tas
 	freecourses = courses
+	allotment = { }
 	while len(freetas) > 0:
 		ta = freetas[0]
-		for i in range(course_count):
+		for i in range(1, course_count + 1):
+			course = tapreflist[ta][i]
+			if course in freecourses:
+				allotment[course] = ta
+				freetas.remove(ta)
+				freecourses.remove(course)
+			else:
+				ta1 = allotment[course]
+				if coursepreflist[course][ta] < coursepreflist[course][ta1] :
+					allotment[course] = ta
+					freetas.remove(ta)
+					freetas.insert(ta1)
+	for allot in allotment:
+		taallotment = TAAlloment.objects.create(
+			course = allot,
+			ta = allotment[allot],
+		)
+		taallotment.save()
+
 			
 
