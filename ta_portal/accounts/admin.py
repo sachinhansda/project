@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import admin
-from .models import User, TAProfile, TeacherProfile, AdminProfile, Course, TAPreference, CoursePreference
+from .models import User, TAProfile, TeacherProfile, AdminProfile, Course, TAPreference, CoursePreference, TAAllotment
 
 # Register your models here.
 """
@@ -56,3 +56,4 @@ admin.site.register(AdminProfile)
 admin.site.register(Course)
 admin.site.register(TAPreference)
 admin.site.register(CoursePreference)
+admin.site.register(TAAllotment)

@@ -91,6 +91,13 @@ class CoursePreference(models.Model):
 	def __str__(self):
 		return self.course.name + " " + " Preference " + str(self.preference_no)
 
+class TAAllotment(models.Model):
+	ta = models.ForeignKey(TAProfile, on_delete=models.CASCADE)
+	course = models.ForeignKey(Course, on_delete=models.CASCADE)
+
+	def __str__(self):
+		return self.course.name
+
 class Declaration(models.Model):
 	MONTHS = (
 		('Jan','January'),

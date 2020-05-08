@@ -257,12 +257,12 @@ def course_preference(request, id=None):
 			for form in formset:
 				if form.is_valid():
 					cd = form.cleaned_data.get('preference')
-					tapreference = CoursePreference.objects.create(
+					coursepreference = CoursePreference.objects.create(
 						ta = cd,
 						course = Course.objects.get(id=id),
 						preference_no = i,
 					)
-					tapreference.save()
+					coursepreference.save()
 					i = i + 1
 		return redirect('/accounts/home')
 	else:
@@ -271,3 +271,18 @@ def course_preference(request, id=None):
 		formset = CoursePrefFormSet()
 		args = { 'formset': formset }
 		return render(request, 'accounts/course_preference.html', args)
+
+def gale_shapley(request):
+	tas = TAProfile.objects.all()
+	courses = Course.objects.all()
+	ta_count = len(tas)
+	course_count = len(courses)
+	taprefs = TAPreference.objects.all()
+	courseprefs = CoursePreference.objects.all()
+	freetas = tas
+	freecourses = courses
+	while len(freetas) > 0:
+		ta = freetas[0]
+		for i in range(course_count):
+			
+
