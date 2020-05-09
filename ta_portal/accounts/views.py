@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.forms import formset_factory
 from django.contrib.auth import update_session_auth_hash
-from accounts.models import User, TAProfile, TeacherProfile, AdminProfile, Course, TAPreference, CoursePreference
+from accounts.models import User, TAProfile, TeacherProfile, AdminProfile, Course, TAPreference, CoursePreference, TAAllotment
 from accounts.forms import (
 	UserChangeForm, 
 	TAProfileChangeForm, 
@@ -283,40 +283,47 @@ def gale_shapley(request):
 		ta = tapref.ta
 		course = tapref.course
 		pref = tapref.preference_no
-		tapreflist[ta][pref] = course
+		ta_pref = ( ta, pref )
+		tapreflist[ta_pref] = course
 	coursepreflist = { }
+	courseprefs = CoursePreference.objects.all()
 	for coursepref in courseprefs:
 		ta = coursepref.ta
 		course = coursepref.course
 		pref = coursepref.preference_no
-		coursepreflist[course][ta] = pref
+		course_ta = ( course, ta )
+		coursepreflist[course_ta] = pref
 	freetas = tas
 	freecourses = courses
 	allotment = { }
 	while len(freetas) > 0:
 		ta = freetas[0]
 		for i in range(1, course_count + 1):
-			course = tapreflist[ta][i]
+			ta_i = ( ta, i )
+			course = tapreflist[ta_i]
 			if course in freecourses:
 				allotment[course] = ta
-				freetas.remove(ta)
-				freecourses.remove(course)
+				freetas.exclude(ta)
+				freecourses.exclude(course)
 			else:
 				ta1 = allotment[course]
-				if coursepreflist[course][ta] < coursepreflist[course][ta1] :
+				course_ta = ( course, ta )
+				course_ta1 = ( course, ta1 )
+				if coursepreflist[course_ta] < coursepreflist[course_ta1] :
 					allotment[course] = ta
-					freetas.remove(ta)
+					freetas.exclude(ta)
 					freetas.insert(ta1)
 	for allot in allotment:
-		taallotment = TAAlloment.objects.create(
+		taallotment = TAAllotment.objects.create(
 			course = allot,
 			ta = allotment[allot],
 		)
 		taallotment.save()
 	return redirect('/accounts/home')
 
+
 def ta_allotment_results(request):
-	allotments = TAAlloment.objects.all()
+	allotments = TAAllotment.objects.all()
 	args = { 'allotments': allotments }
 	return render(request, 'accounts/allotment.html', args)
 	
