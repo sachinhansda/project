@@ -303,7 +303,7 @@ def gale_shapley(request):
 			course = tapreflist[ta_i]
 			if course in freecourses:
 				allotment[course] = ta
-				freetas.exclude(ta)
+				freetas = freetas.exclude(ta)
 				freecourses.exclude(course)
 			else:
 				ta1 = allotment[course]
