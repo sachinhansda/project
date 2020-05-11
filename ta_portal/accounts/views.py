@@ -272,6 +272,7 @@ def course_preference(request, id=None):
 		args = { 'formset': formset }
 		return render(request, 'accounts/course_preference.html', args)
 
+# gale shapley algorithm
 def gale_shapley(request):
 	tas = TAProfile.objects.all()
 	courses = Course.objects.all()
@@ -293,8 +294,12 @@ def gale_shapley(request):
 		pref = coursepref.preference_no
 		course_ta = ( course, ta )
 		coursepreflist[course_ta] = pref
-	freetas = tas
-	freecourses = courses
+	freetas = []
+	for ta in tas:
+		freetas.append(ta)
+	freecourses = []
+	for course in courses:
+		freecourses.append(course)
 	allotment = { }
 	while len(freetas) > 0:
 		ta = freetas[0]
@@ -303,16 +308,18 @@ def gale_shapley(request):
 			course = tapreflist[ta_i]
 			if course in freecourses:
 				allotment[course] = ta
-				freetas = freetas.exclude(ta)
-				freecourses.exclude(course)
+				freetas.remove(ta)
+				freecourses.remove(course)
+				break
 			else:
 				ta1 = allotment[course]
 				course_ta = ( course, ta )
 				course_ta1 = ( course, ta1 )
 				if coursepreflist[course_ta] < coursepreflist[course_ta1] :
 					allotment[course] = ta
-					freetas.exclude(ta)
-					freetas.insert(ta1)
+					freetas.remove(ta)
+					freetas.append(ta1)
+					break
 	for allot in allotment:
 		taallotment = TAAllotment.objects.create(
 			course = allot,
