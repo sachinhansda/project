@@ -42,11 +42,17 @@ def profile_view(request):
 	args = {'user': user}
 	return render(request, 'accounts/profile_view.html', args)
 
-# function to view profile of others
+# function to view profile of teachers
 def profile_view_other(request, pk):
 	teacher = TeacherProfile.objects.get(id=pk)
 	args = {'teacher': teacher}
 	return render(request, 'accounts/profile_view_teacher.html', args)
+
+# function to view profile of tas
+def profile_view_ta(request, pk):
+	ta = TAProfile.objects.get(id=pk)
+	args = {'ta': ta}
+	return render(request, 'accounts/profile_view_ta.html', args)
 
 # profile edit function
 def profile_edit(request):
@@ -173,6 +179,13 @@ def display_courses(request):
 	courses = Course.objects.all()
 	args = { 'courses': courses }
 	return render(request, 'accounts/display_courses.html', args)
+
+# function to display particular course
+def display_course(request, pk):
+	courses = Course.objects.get(pk=id)
+	args = { 'courses': courses }
+	return render(request, 'accounts/display_course.html', args)
+
 
 # function to display courses of a teacher
 def display_courses_teacher(request):

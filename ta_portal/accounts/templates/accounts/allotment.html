@@ -7,9 +7,15 @@
 {% block body %}
 	<div class="container">
 		<table style="border: 1px solid black; width:100%">
-			<tr><th style="border: 1px solid black"> Course </th><th style="border: 1px solid black"> TA </th></tr>
+			<tr>
+				<th style="border: 1px solid black"> Course </th>
+				<th style="border: 1px solid black"> TA </th>
+			</tr>
 			{% for allotment in allotments %}
-				<tr><td style="border: 1px solid black">{{ allotment.course }}</td><td style="border: 1px solid black">{{ allotment.ta }}</td></tr>
+				<tr>
+					<td style="border: 1px solid black"><a href="{% url 'display_course' pk=allotment.course.id %}">{{ allotment.course }}</td>
+					<td style="border: 1px solid black"><a href="{% url 'profile_view_ta' pk=allotment.ta.id %}">{{ allotment.ta }}</a></td>
+				</tr>
 			{% endfor %}
 		</table>
 	</div>
