@@ -182,7 +182,7 @@ def display_courses(request):
 
 # function to display particular course
 def display_course(request, pk):
-	courses = Course.objects.get(pk=id)
+	courses = Course.objects.get(id=pk)
 	args = { 'courses': courses }
 	return render(request, 'accounts/display_course.html', args)
 
