@@ -6,8 +6,9 @@
 
 {% block body %}
 	<div class="container">
+	<h1>Courses</h1>
 	{% if user.role == 3 %}
-		<p><a href="{% url 'allotment' %}">Allot TAs</a></p>
+		<p><a href="{% url 'allotment' %}"><h3>Allot TAs</h3></a></p>
 	{% endif %}
 	<table style="border: 1px solid black; width:100%">
 	{% for course in courses %}

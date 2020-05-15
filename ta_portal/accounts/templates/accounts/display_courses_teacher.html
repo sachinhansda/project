@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 
 {% block head%}
-	<title>Your Courses</title>
+	<title>My Courses</title>
 {% endblock %}
 
 {% block body %}
 	<div class="container">
+	<h1>My Courses</h1>
 	<table style="border: 1px solid black; width:100%">
 	{% for course in courses %}
 	<tr>
